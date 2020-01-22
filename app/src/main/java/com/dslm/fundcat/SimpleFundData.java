@@ -7,7 +7,10 @@ public class SimpleFundData
     private String date;
     private double netWorthTrend;
     private double equityReturn;
-    
+    private double units;
+    private double totalCost;
+    private double totalEquityReturn;
+
     public SimpleFundData()
     {
         this(null, null, null, 0, 0);
@@ -70,5 +73,29 @@ public class SimpleFundData
     public void setNetWorthTrend(double netWorthTrend)
     {
         this.netWorthTrend = netWorthTrend;
+    }
+
+    public double getUnits() {
+        return units;
+    }
+
+    public void setUnits(double units) {
+        this.units = units;
+    }
+
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
+    }
+
+    public double getTotalEquityReturn() {
+        return totalEquityReturn;
+    }
+
+    public void setTotalEquityReturn(double totalEquityReturn) {
+        this.totalEquityReturn = totalEquityReturn;
     }
 }

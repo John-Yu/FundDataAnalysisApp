@@ -25,7 +25,7 @@ public class DateDialogFragment extends DialogFragment implements View.OnClickLi
     @Override
     public void onClick(View v) {
         dateSelectedListener.dateSelected(String.format("%04d-%02d-%02d",
-                datePicker.getYear() % 100,
+                datePicker.getYear() % 10000,
                 datePicker.getMonth() + 1,
                 datePicker.getDayOfMonth()));
         onDismiss(getDialog());

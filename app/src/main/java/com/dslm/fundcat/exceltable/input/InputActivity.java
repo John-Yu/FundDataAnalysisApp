@@ -125,7 +125,7 @@ public class InputActivity extends AppCompatActivity implements DateSelectedList
                     SimpleLOGData logData = new SimpleLOGData();
                     logData.setCode(code);
                     logData.setDate(date);
-                    if (switchDir.isEnabled()) {
+                    if (switchDir.isChecked()) {
                         logData.setDirect("卖");
                     } else logData.setDirect("买");
                     DecimalFormat df = new DecimalFormat("#.00");
@@ -134,7 +134,7 @@ public class InputActivity extends AppCompatActivity implements DateSelectedList
                                     df.format(
                                             Double.valueOf(
                                                     editTextF.getText().toString()))));
-                    logData.setNumber(
+                    logData.setUnits(
                             Double.valueOf(
                                     df.format(
                                             Double.valueOf(

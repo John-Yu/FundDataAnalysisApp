@@ -25,12 +25,12 @@ public class OpenHelper extends SQLiteOpenHelper
                 "equity_return decimal(10,2)," +
                 "R Integer," +
                 "return Integer)");
-        db.execSQL("Create Table If Not Exists LOG (" +
+        db.execSQL("Create Table If Not Exists fund_log (" +
                 "log_order Integer primary key autoincrement," +
                 "fund_code varchar(25) not null," +
                 "log_date date," +
                 "direct varchar(25)," +
-                "number decimal(10,2)," +
+                "units decimal(10,2)," +
                 "money decimal(10,2))");
     }
     

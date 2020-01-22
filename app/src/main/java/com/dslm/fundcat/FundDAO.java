@@ -34,9 +34,9 @@ public class FundDAO
         contentValues.put("fund_code", fundData.getCode());
         contentValues.put("direct", fundData.getDirect());
         contentValues.put("log_date", fundData.getDate());
-        contentValues.put("number", fundData.getNumber());
+        contentValues.put("units", fundData.getUnits());
         contentValues.put("money", fundData.getMoney());
-        long insertResult = database.insert("LOG", null, contentValues);
+        long insertResult = database.insert("fund_log", null, contentValues);
         return insertResult != -1;
     }
 
@@ -129,6 +129,26 @@ public class FundDAO
             fundData.setDate(cursor.getString(3));
             fundData.setNetWorthTrend(cursor.getDouble(4));
             fundData.setEquityReturn(cursor.getDouble(5));
+            List<SimpleLOGData> logDataList = query(fundData.getCode());
+            double totalUnits = 0.0;
+            double totalCost = 0.0;
+            double totalReturn = 0.0;
+            for (int i = 0; i < logDataList.size(); i++) {
+                SimpleLOGData logData = logDataList.get(i);
+                if (logData.getDirect().equals("买")) {
+                    totalUnits += logData.getUnits();
+                    totalCost += logData.getMoney();
+                } else {
+                    assert totalUnits > 0.0;
+                    double d = totalCost / totalUnits;
+                    totalReturn += logData.getMoney() - d * logData.getUnits();
+                    totalUnits -= logData.getUnits();
+                    totalCost -= d * logData.getMoney();
+                }
+            }
+            fundData.setTotalCost(totalCost);
+            fundData.setTotalEquityReturn(totalReturn);
+            fundData.setUnits(totalUnits);
             fundDataList.add(fundData);
         }
         cursor.close();
@@ -137,13 +157,13 @@ public class FundDAO
 
     public List<SimpleLOGData> query(String code) {
         List<SimpleLOGData> fundDataList = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM LOG WHERE CODE=\'" + code + "\' ORDER BY log_date", null);
+        Cursor cursor = database.query("fund_log", null, "fund_code=?", new String[]{code}, null, null, "log_date", null);
         while (cursor.moveToNext()) {
             SimpleLOGData fundData = new SimpleLOGData();
             fundData.setCode(cursor.getString(1));
             fundData.setDate(cursor.getString(2));
             fundData.setDirect(cursor.getString(3));
-            fundData.setNumber(cursor.getDouble(4));
+            fundData.setUnits(cursor.getDouble(4));
             fundData.setMoney(cursor.getDouble(5));
             fundDataList.add(fundData);
         }
