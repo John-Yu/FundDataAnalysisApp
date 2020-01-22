@@ -1,16 +1,21 @@
-package com.dslm.funddataanalysisapp.exceltable.column;
+package com.dslm.fundcat.exceltable.column;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
-import com.dslm.funddataanalysisapp.R;
 
-import java.util.*;
+import com.dslm.fundcat.R;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import static android.content.Context.MODE_PRIVATE;
 

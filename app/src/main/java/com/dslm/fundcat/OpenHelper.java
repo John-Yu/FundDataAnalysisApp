@@ -1,4 +1,4 @@
-package com.dslm.funddataanalysisapp;
+package com.dslm.fundcat;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

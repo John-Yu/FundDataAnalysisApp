@@ -1,4 +1,4 @@
-package com.dslm.funddataanalysisapp.delete;
+package com.dslm.fundcat.delete;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckedTextView;
 
+import com.dslm.fundcat.R;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.dslm.funddataanalysisapp.R;
 
 public class DeleteAdapter extends BaseAdapter
 {
@@ -54,8 +54,8 @@ public class DeleteAdapter extends BaseAdapter
         {
             convertView = LayoutInflater.from(context).inflate(R.layout.delete_check_text_view, null);
         }
-        
-        final CheckedTextView checkedTextView = (CheckedTextView)convertView.findViewById(R.id.checked_text_view);
+
+        final CheckedTextView checkedTextView = convertView.findViewById(R.id.checked_text_view);
         checkedTextView.setText(fundList.get(position));
         
         checkedTextView.setOnClickListener(new View.OnClickListener()

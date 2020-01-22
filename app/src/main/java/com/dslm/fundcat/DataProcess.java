@@ -1,19 +1,33 @@
-package com.dslm.funddataanalysisapp;
+package com.dslm.fundcat;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.ss.usermodel.*;
+
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DataFormat;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 //数据下载，数据库以及excel储存类
 public class DataProcess
@@ -89,7 +103,7 @@ public class DataProcess
         FundDAO fundDAO = new FundDAO(sqLiteDatabase);
         SimpleFundData fundData = new SimpleFundData();
         fundData.setCode(code);
-        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         fundData.setDate(sdf.format(new Date(newestDate)));
         fundData.setNetWorthTrend(newestNetWorthTrend);
         fundData.setEquityReturn(newestEquityReturn);
@@ -158,8 +172,8 @@ public class DataProcess
             {
                 row = sheet.createRow(i - 1);
             }
-    
-            sdf = new SimpleDateFormat("yy-MM-dd");
+
+            sdf = new SimpleDateFormat("yyyy-MM-dd");
             
             row.createCell(0, CellType.STRING).setCellValue(sdf.format(new Date(dates.get(i - 2))));
             

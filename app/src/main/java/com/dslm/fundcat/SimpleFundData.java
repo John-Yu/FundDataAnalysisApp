@@ -1,4 +1,4 @@
-package com.dslm.funddataanalysisapp;
+package com.dslm.fundcat;
 
 public class SimpleFundData
 {

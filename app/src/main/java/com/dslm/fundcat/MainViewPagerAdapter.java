@@ -1,25 +1,26 @@
-package com.dslm.funddataanalysisapp;
+package com.dslm.fundcat;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v4.view.PagerAdapter;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import com.dslm.funddataanalysisapp.delete.DeleteActivity;
-import com.dslm.funddataanalysisapp.exceltable.ExcelTableActivity;
-import com.dslm.funddataanalysisapp.exceltable.column.ColumnOrderActivity;
+
+import com.dslm.fundcat.delete.DeleteActivity;
+import com.dslm.fundcat.exceltable.column.ColumnOrderActivity;
 
 import java.util.List;
 
-import static com.dslm.funddataanalysisapp.MainActivity.openHelper;
-import static com.dslm.funddataanalysisapp.MainActivity.context;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
+
+import static com.dslm.fundcat.MainActivity.context;
+import static com.dslm.fundcat.MainActivity.openHelper;
 
 public class MainViewPagerAdapter extends PagerAdapter implements OnItemClickListener
 {

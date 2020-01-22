@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.dslm.funddataanalysisapp">
+    package="com.dslm.fundcat">
     
     <uses-permission android:name="android.permission.INTERNET"/>
     
@@ -13,7 +13,7 @@
             android:supportsRtl="true"
             android:theme="@style/DefaultTheme">
         <activity
-                android:name=".MainActivity"
+            android:name="com.dslm.fundcat.MainActivity"
                 android:launchMode="singleTask"
                 android:screenOrientation="portrait">
             <intent-filter>
@@ -23,21 +23,22 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".exceltable.ExcelTableActivity"
+            android:name="com.dslm.fundcat.exceltable.ExcelTableActivity"
                 android:configChanges="orientation|screenSize"
                 android:launchMode="singleTop">
         </activity>
         <activity
-                android:name=".exceltable.input.InputActivity"
+            android:name="com.dslm.fundcat.exceltable.input.InputActivity"
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".delete.DeleteActivity"
+            android:name="com.dslm.fundcat.delete.DeleteActivity"
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".exceltable.column.ColumnOrderActivity"
+        <activity
+            android:name="com.dslm.fundcat.exceltable.column.ColumnOrderActivity"
                   android:launchMode="singleTop"
                   android:screenOrientation="portrait">
         </activity>

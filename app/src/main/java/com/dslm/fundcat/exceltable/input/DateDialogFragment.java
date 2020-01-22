@@ -1,17 +1,15 @@
-package com.dslm.funddataanalysisapp.exceltable.input;
+package com.dslm.fundcat.exceltable.input;
 
+import android.annotation.SuppressLint;
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import com.dslm.funddataanalysisapp.R;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.dslm.fundcat.R;
 
 public class DateDialogFragment extends DialogFragment implements View.OnClickListener
 {
@@ -22,11 +20,11 @@ public class DateDialogFragment extends DialogFragment implements View.OnClickLi
     {
     
     }
-    
+
+    @SuppressLint("DefaultLocale")
     @Override
-    public void onClick(View v)
-    {
-        dateSelectedListener.dateSelected(String.format("%02d-%02d-%02d",
+    public void onClick(View v) {
+        dateSelectedListener.dateSelected(String.format("%04d-%02d-%02d",
                 datePicker.getYear() % 100,
                 datePicker.getMonth() + 1,
                 datePicker.getDayOfMonth()));

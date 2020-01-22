@@ -1,19 +1,21 @@
-package com.dslm.funddataanalysisapp;
+package com.dslm.fundcat;
 
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.dslm.funddataanalysisapp.exceltable.ExcelTableActivity;
+
+import com.dslm.fundcat.exceltable.ExcelTableActivity;
 
 import java.util.Collections;
 import java.util.List;
+
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class FundListRecyclerAdapter extends RecyclerView.Adapter
 {
@@ -43,8 +45,8 @@ public class FundListRecyclerAdapter extends RecyclerView.Adapter
         customViewHolder.name.setText(fundData.getName());
         customViewHolder.code.setText(fundData.getCode());
         customViewHolder.date.setText(fundData.getDate());
-        customViewHolder.netWorthTrend.setText(String.valueOf(String.format("%.2f", fundData.getNetWorthTrend())));
-        customViewHolder.equityReturn.setText(String.valueOf(String.format("%.2f%%", fundData.getEquityReturn())));
+        customViewHolder.netWorthTrend.setText(String.format("%.2f", fundData.getNetWorthTrend()));
+        customViewHolder.equityReturn.setText(String.format("%.2f%%", fundData.getEquityReturn()));
     
         if(fundData.getEquityReturn() < 0)
         {

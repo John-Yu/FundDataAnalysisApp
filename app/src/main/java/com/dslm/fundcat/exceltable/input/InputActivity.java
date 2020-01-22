@@ -1,10 +1,8 @@
-package com.dslm.funddataanalysisapp.exceltable.input;
+package com.dslm.fundcat.exceltable.input;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -12,12 +10,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.*;
-import com.dslm.funddataanalysisapp.FundDAO;
-import com.dslm.funddataanalysisapp.MainActivity;
-import com.dslm.funddataanalysisapp.OpenHelper;
-import com.dslm.funddataanalysisapp.R;
-import org.apache.poi.hssf.usermodel.*;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+
+import com.dslm.fundcat.FundDAO;
+import com.dslm.fundcat.MainActivity;
+import com.dslm.fundcat.OpenHelper;
+import com.dslm.fundcat.R;
+
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,6 +31,9 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class InputActivity extends AppCompatActivity implements DateSelectedListener
 {
@@ -62,8 +69,8 @@ public class InputActivity extends AppCompatActivity implements DateSelectedList
         SQLiteDatabase sqLiteDatabase = openHelper.getReadableDatabase();
         FundDAO fundDAO = new FundDAO(sqLiteDatabase);
         List<String> funds = fundDAO.getCodeAndNameList();
-        
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, funds);
         sqLiteDatabase.close();
         
@@ -75,7 +82,7 @@ public class InputActivity extends AppCompatActivity implements DateSelectedList
     {
         datePicker = (EditText) findViewById(R.id.input_date_picker);
         datePicker.setInputType(InputType.TYPE_NULL);
-        SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         datePicker.setText(sdf.format(new Date(System.currentTimeMillis())));
         datePicker.setOnClickListener(new View.OnClickListener()
         {

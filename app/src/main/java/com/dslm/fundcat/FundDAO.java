@@ -1,9 +1,8 @@
-package com.dslm.funddataanalysisapp;
+package com.dslm.fundcat;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +60,8 @@ public class FundDAO
             contentValueF.put("net_worth_trend", cursorF.getDouble(4));
             contentValueF.put("equity_return", cursorF.getDouble(5));
         }
-        
+        cursorF.close();
+
         Cursor cursorT = database.query("fund_list", null,
                 "fund_order=?", new String[]{(toPosition + 1) + ""}, null,
                 null, null, null);
@@ -74,6 +74,7 @@ public class FundDAO
             contentValueT.put("net_worth_trend", cursorT.getDouble(4));
             contentValueT.put("equity_return", cursorT.getDouble(5));
         }
+        cursorT.close();
     
         database.update("fund_list", contentValueF,
                 "fund_order=?", new String[]{(toPosition + 1) + ""});
@@ -99,6 +100,7 @@ public class FundDAO
         {
             fundData.setName(cursor.getString(2));
         }
+        cursor.close();
         return fundData;
     }
     
@@ -118,6 +120,7 @@ public class FundDAO
             fundData.setEquityReturn(cursor.getDouble(5));
             fundDataList.add(fundData);
         }
+        cursor.close();
         return fundDataList;
     }
     
@@ -131,6 +134,7 @@ public class FundDAO
         {
             codeList.add(cursor.getString(1));
         }
+        cursor.close();
         return codeList;
     }
     
@@ -145,6 +149,7 @@ public class FundDAO
             codeAndNameList.add(cursor.getString(1) + " "
             +cursor.getString(2));
         }
+        cursor.close();
         return codeAndNameList;
     }
 }

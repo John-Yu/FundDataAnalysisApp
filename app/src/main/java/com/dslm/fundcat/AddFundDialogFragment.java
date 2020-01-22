@@ -1,8 +1,11 @@
-package com.dslm.funddataanalysisapp;
+package com.dslm.fundcat;
 
 
-import android.os.*;
 import android.app.DialogFragment;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import static com.dslm.funddataanalysisapp.MainViewPagerAdapter.recyclerAdapter;
+import static com.dslm.fundcat.MainViewPagerAdapter.recyclerAdapter;
 
 public class AddFundDialogFragment extends DialogFragment
 {
@@ -69,7 +72,7 @@ public class AddFundDialogFragment extends DialogFragment
                             switch (msg.what)
                             {
                                 case HandlerWhatValue.netWorkProblem:
-                                    Toast.makeText(getActivity(), String.valueOf(((SimpleFundData)msg.obj).getCode()) + "号基金下载网络异常", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), ((SimpleFundData) msg.obj).getCode() + "号基金下载网络异常", Toast.LENGTH_SHORT).show();
                                     add.setEnabled(true);
                                     break;
                                 case HandlerWhatValue.codeIsWrong:
@@ -77,7 +80,7 @@ public class AddFundDialogFragment extends DialogFragment
                                     add.setEnabled(true);
                                     break;
                                 case HandlerWhatValue.addedData:
-                                    Toast.makeText(getActivity(), String.valueOf(((SimpleFundData)msg.obj).getCode()) + "号基金下载成功", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), ((SimpleFundData) msg.obj).getCode() + "号基金下载成功", Toast.LENGTH_SHORT).show();
                                     recyclerAdapter.addData((SimpleFundData) msg.obj);
                                     onDismiss(getDialog());
                                     break;

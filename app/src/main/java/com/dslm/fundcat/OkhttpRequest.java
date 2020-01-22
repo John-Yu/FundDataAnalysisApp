@@ -1,16 +1,20 @@
-package com.dslm.funddataanalysisapp;
+package com.dslm.fundcat;
 
-import android.app.Activity;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
-import okhttp3.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 //数据下载类(子线程)
 public class OkhttpRequest
@@ -37,13 +41,13 @@ public class OkhttpRequest
             @Override
             public void onResponse(Call call, Response response) throws IOException
             {
-                String data = response.body().string();
-                if (data == null || data.indexOf("基金或股票信息") == -1)
+                String data = Objects.requireNonNull(response.body()).string();
+                if (!data.contains("基金或股票信息"))
                 {
                     handler.sendEmptyMessage(HandlerWhatValue.codeIsWrong);
                 } else
                 {
-                    DataProcess.saveData(addFundHandler, String.valueOf(data));
+                    DataProcess.saveData(addFundHandler, data);
                 }
             }
         });
@@ -64,7 +68,7 @@ public class OkhttpRequest
                 {
                     case HandlerWhatValue.sameData:
                         if(msg.obj != null)
-                            Toast.makeText(MainActivity.context, String.valueOf(((SimpleFundData)msg.obj).getCode()) + "号基金刷新成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.context, ((SimpleFundData) msg.obj).getCode() + "号基金刷新成功", Toast.LENGTH_SHORT).show();
                         if(i[0] < codeList.size())
                         {
                             getFundData(this, codeList.get(i[0]));
