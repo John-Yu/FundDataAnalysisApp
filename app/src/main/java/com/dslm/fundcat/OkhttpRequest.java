@@ -47,6 +47,10 @@ public class OkhttpRequest
                     handler.sendEmptyMessage(HandlerWhatValue.codeIsWrong);
                 } else
                 {
+                    //DataProcess.saveData(addFundHandler, String.valueOf(data));
+                    //根据后续处理要求，需要把所有';'变成'\n',把所有'/'变成'\n'
+                    String tmp = data.replace('/', '\n');
+                    data = tmp.replace(';', '\n');
                     DataProcess.saveData(addFundHandler, data);
                 }
             }

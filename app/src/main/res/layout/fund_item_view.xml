@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@drawable/fund_item_pressed_ripple" android:layout_marginBottom="2dp">
+    android:layout_width="match_parent"
+    android:layout_height="80sp"
+    android:background="@drawable/fund_item_pressed_ripple"
+    android:layout_marginBottom="2dp">
     
     <TextView
             android:text="日期"
@@ -16,7 +15,8 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_marginTop="9dp"
-            android:layout_marginRight="9dp" android:textColor="@android:color/black"/>
+        android:layout_marginRight="9dp"
+        android:textColor="@android:color/black" />
     <TextView
             android:text="名字"
             android:layout_width="wrap_content"
@@ -37,26 +37,29 @@
             android:id="@+id/text_code"
             android:textSize="17dp"
             android:layout_below="@+id/text_name"
-            android:layout_alignLeft="@+id/text_name" android:textColor="@android:color/black"/>
+        android:layout_alignLeft="@+id/text_name"
+        android:textColor="@android:color/black" />
     <TextView
             android:text="利率"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/text_equity_return"
-            android:textSize="26dp"
+        android:textSize="18sp"
             android:textAlignment="textEnd"
             android:layout_marginBottom="9dp"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" android:textColor="@android:color/black"/>
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/black" />
     <TextView
             android:text="净值"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/text_net_worth_trend"
-            android:textSize="26dp"
+        android:textSize="18sp"
             android:textAlignment="textEnd"
             android:layout_alignBaseline="@+id/text_equity_return"
             android:layout_alignBottom="@+id/text_equity_return"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="22dp" android:textColor="@android:color/black"/>
+        android:layout_marginRight="22dp"
+        android:textColor="@android:color/black" />
 </RelativeLayout>

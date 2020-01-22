@@ -22,7 +22,16 @@ public class OpenHelper extends SQLiteOpenHelper
                 "name varchar(255)," +
                 "newest_date date," +
                 "net_worth_trend decimal(10,2)," +
-                "equity_return decimal(10,2))");
+                "equity_return decimal(10,2)," +
+                "R Integer," +
+                "return Integer)");
+        db.execSQL("Create Table If Not Exists LOG (" +
+                "log_order Integer primary key autoincrement," +
+                "fund_code varchar(25) not null," +
+                "log_date date," +
+                "direct varchar(25)," +
+                "number decimal(10,2)," +
+                "money decimal(10,2))");
     }
     
     @Override

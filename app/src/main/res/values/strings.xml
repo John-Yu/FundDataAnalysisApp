@@ -11,4 +11,7 @@
     <string name="check">确定</string>
     <string name="to_top">回到顶部</string>
     <string name="drag_button">拖动排序</string>
+    <string name="buy">买</string>
+    <string name="buy_sell">买卖</string>
+    <string name="sell">卖</string>
 </resources>

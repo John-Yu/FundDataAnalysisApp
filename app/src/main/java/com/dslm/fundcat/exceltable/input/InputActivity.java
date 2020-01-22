@@ -13,20 +13,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import com.dslm.fundcat.FundDAO;
 import com.dslm.fundcat.MainActivity;
 import com.dslm.fundcat.OpenHelper;
 import com.dslm.fundcat.R;
+import com.dslm.fundcat.SimpleLOGData;
 
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,9 +35,8 @@ public class InputActivity extends AppCompatActivity implements DateSelectedList
     EditText datePicker;
     EditText editTextF;
     EditText editTextG;
-    EditText editTextJ;
-    EditText editTextK;
-    
+    Switch switchDir;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -52,14 +45,14 @@ public class InputActivity extends AppCompatActivity implements DateSelectedList
         Intent intent_accept = getIntent();
         
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
         
         fundPick();
         DatePick();
         editTextF = findViewById(R.id.input_column_F);
         editTextG = findViewById(R.id.input_column_G);
-        editTextJ = findViewById(R.id.input_column_J);
-        editTextK = findViewById(R.id.input_column_K);
+        switchDir = findViewById(R.id.switch1);
     }
     
     public void fundPick()
@@ -125,99 +118,37 @@ public class InputActivity extends AppCompatActivity implements DateSelectedList
                 return true;
             case R.id.id_check_button:
                 item.setEnabled(false);
-                
-                String code = String.valueOf(fundPicker.getSelectedItem()).substring(0, 6);
-                String date = datePicker.getText().toString();
-                HSSFWorkbook wb = new HSSFWorkbook();
-                HSSFSheet sheet = wb.createSheet();
-                HSSFRow row;
-                File historyDataFile = new File(getFilesDir() + "/" + code + ".xls");
-                try
-                {
-                    if (!historyDataFile.exists())
-                    {
-                        finish();
-                    } else
-                    {
-                        FileInputStream input = new FileInputStream(historyDataFile);
-                        wb = new HSSFWorkbook(input);
-                        input.close();
-                        sheet = wb.getSheetAt(0);
-                    }
-                } catch (IOException e)
-                {
-                    Log.e("写入基金excel问题", "saveData: ", e);
-                }
-                for (int i = 2; i < (int) sheet.getRow(0).getCell(0).getNumericCellValue() + 2; i++)
-                {
-                    if (sheet.getRow(i).getCell(0).getStringCellValue().equals(date))
-                    {
-                        row = sheet.getRow(i);
-                        DecimalFormat df = new DecimalFormat("#.00");
-                        
-                        System.out.println(i);
-                        
-                        if (editTextF.getText().toString().equals(""))
-                        {
-                            row.createCell(5).setCellValue("");
-                        } else
-                        {
-                            row.createCell(5).setCellValue(
-                                    Double.valueOf(
-                                            df.format(
-                                                    Double.valueOf(
-                                                            editTextF.getText().toString()))));
-                        }
-                        if (editTextG.getText().toString().equals(""))
-                        {
-                            row.createCell(6).setCellValue("");
-                        } else
-                        {
-                            row.createCell(6).setCellValue(
-                                    Double.valueOf(
-                                            df.format(
-                                                    Double.valueOf(
-                                                            editTextG.getText().toString()))));
-                        }
-                        if (editTextJ.getText().toString().equals(""))
-                        {
-                            row.createCell(9).setCellValue("");
-                        } else
-                        {
-                            row.createCell(9).setCellValue(
-                                    Double.valueOf(
-                                            df.format(
-                                                    Double.valueOf(
-                                                            editTextJ.getText().toString()))));
-                        }
-                        if (editTextK.getText().toString().equals(""))
-                        {
-                            row.createCell(10).setCellValue("");
-                        } else
-                        {
-                            row.createCell(10).setCellValue(
-                                    Double.valueOf(
-                                            df.format(
-                                                    Double.valueOf(
-                                                            editTextK.getText().toString()))));
-                        }
-                        break;
+                if (editTextG.getText().toString().equals("") || editTextF.getText().toString().equals("")) {
+                } else {
+                    String code = String.valueOf(fundPicker.getSelectedItem()).substring(0, 6);
+                    String date = datePicker.getText().toString();
+                    SimpleLOGData logData = new SimpleLOGData();
+                    logData.setCode(code);
+                    logData.setDate(date);
+                    if (switchDir.isEnabled()) {
+                        logData.setDirect("卖");
+                    } else logData.setDirect("买");
+                    DecimalFormat df = new DecimalFormat("#.00");
+                    logData.setMoney(
+                            Double.valueOf(
+                                    df.format(
+                                            Double.valueOf(
+                                                    editTextF.getText().toString()))));
+                    logData.setNumber(
+                            Double.valueOf(
+                                    df.format(
+                                            Double.valueOf(
+                                                    editTextG.getText().toString()))));
+
+                    try {
+                        OpenHelper openHelper = MainActivity.openHelper;
+                        SQLiteDatabase sqLiteDatabase = openHelper.getReadableDatabase();
+                        FundDAO fundDAO = new FundDAO(sqLiteDatabase);
+                        fundDAO.insert(logData);
+                    } catch (Exception e) {
+                        Log.e("写入基金记录问题", "saveData: ", e);
                     }
                 }
-    
-                wb.getSheetAt(0).getRow(0).createCell(1).setCellValue(true);
-                
-                try
-                {
-                    FileOutputStream output = new FileOutputStream(historyDataFile);
-                    wb.write(output);
-                    output.flush();
-                    output.close();
-                } catch (Exception e)
-                {
-                    Log.e("写入基金excel问题", "saveData: ", e);
-                }
-                
                 finish();
                 return true;
         }

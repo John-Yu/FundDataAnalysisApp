@@ -28,7 +28,18 @@ public class FundDAO
         long insertResult = database.insert("fund_list", null, contentValues);
         return insertResult != -1;
     }
-    
+
+    public boolean insert(SimpleLOGData fundData) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("fund_code", fundData.getCode());
+        contentValues.put("direct", fundData.getDirect());
+        contentValues.put("log_date", fundData.getDate());
+        contentValues.put("number", fundData.getNumber());
+        contentValues.put("money", fundData.getMoney());
+        long insertResult = database.insert("LOG", null, contentValues);
+        return insertResult != -1;
+    }
+
     public boolean delete(String code)
     {
         int deleteResult = database.delete("fund_list", "fund_code=?", new String[] {code});
@@ -123,7 +134,23 @@ public class FundDAO
         cursor.close();
         return fundDataList;
     }
-    
+
+    public List<SimpleLOGData> query(String code) {
+        List<SimpleLOGData> fundDataList = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM LOG WHERE CODE=\'" + code + "\' ORDER BY log_date", null);
+        while (cursor.moveToNext()) {
+            SimpleLOGData fundData = new SimpleLOGData();
+            fundData.setCode(cursor.getString(1));
+            fundData.setDate(cursor.getString(2));
+            fundData.setDirect(cursor.getString(3));
+            fundData.setNumber(cursor.getDouble(4));
+            fundData.setMoney(cursor.getDouble(5));
+            fundDataList.add(fundData);
+        }
+        return fundDataList;
+    }
+
+ 
     public List<String> getCodeList()
     {
         List<String> codeList = new ArrayList<>();

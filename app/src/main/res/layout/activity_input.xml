@@ -42,9 +42,11 @@
             android:layout_height="wrap_content" android:gravity="center"
             android:layout_weight="1">
         <TextView
-                android:text="买入(元):"
-                android:layout_width="110dp"
-                android:layout_height="wrap_content" android:textAlignment="viewEnd" android:paddingRight="10dp"/>
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:text="金额:"
+            android:textAlignment="viewEnd" />
         <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,9 +59,11 @@
             android:layout_height="wrap_content" android:gravity="center"
             android:layout_weight="1">
         <TextView
-                android:text="买入手续费(元):"
-                android:layout_width="110dp"
-                android:layout_height="wrap_content" android:textAlignment="viewEnd" android:paddingRight="10dp"/>
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:text="份额:"
+            android:textAlignment="viewEnd" />
         <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,33 +72,33 @@
                 android:textAlignment="viewEnd" android:id="@+id/input_column_G" android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:gravity="center"
-            android:layout_weight="1">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
         <TextView
-                android:text="卖出份额:"
-                android:layout_width="110dp"
-                android:layout_height="wrap_content" android:textAlignment="viewEnd" android:paddingRight="10dp"/>
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="number|numberSigned|numberDecimal"
-                android:ems="10"
-                android:textAlignment="viewEnd" android:id="@+id/input_column_J" android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:gravity="center"
-            android:layout_weight="1">
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/buy"
+            android:textAlignment="viewEnd" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center" />
+
         <TextView
-                android:text="卖出手续费(元):"
-                android:layout_width="110dp"
-                android:layout_height="wrap_content" android:textAlignment="viewEnd" android:paddingRight="10dp"/>
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="number|numberSigned|numberDecimal"
-                android:ems="10"
-                android:textAlignment="viewEnd" android:id="@+id/input_column_K" android:layout_weight="1"/>
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/sell"
+            android:textAlignment="center" />
     </LinearLayout>
 </LinearLayout>
