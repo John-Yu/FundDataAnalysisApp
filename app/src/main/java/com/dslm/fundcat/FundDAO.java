@@ -140,10 +140,10 @@ public class FundDAO
                     totalCost += logData.getMoney();
                 } else {
                     assert totalUnits > 0.0;
-                    double d = totalCost / totalUnits;
-                    totalReturn += logData.getMoney() - d * logData.getUnits();
+                    double d = logData.getUnits() * totalCost / totalUnits;
+                    totalReturn += logData.getMoney() - d;
                     totalUnits -= logData.getUnits();
-                    totalCost -= d * logData.getMoney();
+                    totalCost -= d;
                 }
             }
             fundData.setTotalCost(totalCost);
